@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Dashboard Mahasiswa Profesional">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Mahasiswa</title>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: radial-gradient(circle at 30% 20%, #7E57C2, #512DA8 50%, #311B92 100%);
+      color: white;
+      overflow: hidden;
+    }
+
+    .flutter-app-loading {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      background: radial-gradient(circle at 30% 20%, #7E57C2, #512DA8 50%, #311B92 100%);
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .flutter-app-loading.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .logo-ring {
+      width: 150px;
+      height: 150px;
+      position: relative;
+      margin-bottom: 40px;
+      animation: pulse-ring 2.5s infinite ease-in-out;
+    }
+
+    .logo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #E1BEE7 0%, #BA68C8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 60px;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.15);
+      position: relative;
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+
+    .dots-loader {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: white;
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+
+    .dot:nth-child(1) { animation-delay: -0.32s; }
+    .dot:nth-child(2) { animation-delay: -0.16s; }
+    .dot:nth-child(3) { animation-delay: 0s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); opacity: 0.6; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen" class="flutter-app-loading">
+    <div class="logo-ring">
+      <div class="logo-inner">📱</div>
+    </div>
+
+    <div class="dots-loader">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+
+  <!-- Flutter app bootstrap -->
+  <script src="flutter_bootstrap.js" async></script>
+
+  <!-- Sembunyikan logo begitu Flutter siap -->
+  <script>
+    window.addEventListener('flutter-first-frame', function() {
+      const loader = document.getElementById('loading-screen');
+      loader.classList.add('hidden');
+      setTimeout(() => loader.remove(), 1000);
+    });
+  </script>
+</body>
+</html>
